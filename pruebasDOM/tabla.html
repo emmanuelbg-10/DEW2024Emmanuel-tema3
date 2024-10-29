@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    tr:hover {
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <h1>Rellenar una tabla</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    <thead>
+      <tr>
+        <th colspan="3">Total</th>
+        <td id="total">--</td>
+      </tr>
+    </thead>
+  </table>
+  <p>
+    <button onclick="addSamsung()">Comprar Samsung</button>
+  </p>
+  <script>
+    let data = [
+      ['zacapa23', 59.99, 4],
+      ['Ramón Bilbao', 15.22, 8],
+      ['Estrella Galicia', 0.82, 43]
+    ]
+
+    const tbody = document.querySelector('tbody')
+    const total = document.querySelector('#total');
+
+    function addRow(row) {
+      tbody.innerHTML += `<tr onclick="deleteRow(\'${row[0]}\')">
+        <td>${row[0]}</td>
+        <td>${row[1]}€</td>
+        <td>${row[2]}</td>
+        <td>${row[1] * row[2]}€</td>
+      </tr>`;
+    }
+
+    function renderTable() {
+      tbody.innerHTML = ""
+      data.forEach(row => addRow(row))
+      //total.textContent = data.reduce((a, row)=> a+row[1]*row[2], 0) + "€";
+      let calculateTotal = 0;
+      for (let i=0; i < data.length; i++) {
+        calculateTotal += data[i][1] * data[i][2];
+      }
+      total.textContent = calculateTotal + "€"
+    }
+
+    function deleteRow(product) {
+      data = data.filter(row => row[0] != product)
+      renderTable()
+    }
+
+    function addSamsung() {
+      data.push(['Samsung S22', 235, 1])
+      renderTable()
+    }
+
+    //deleteRow('Ramón Bilbao')
+    renderTable()
+  </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Prueba de lista</h1>  
+  <ul></ul>
+  <script>
+    const fruits = ['banana', 'watermelon', 'apple', 'pinacle'];
+    let list = document.querySelector('ul');
+    console.log("vacio: ", list.textContent);
+    // fruits.forEach(fruit => {
+    //   list.innerHTML += "<li>" + fruit + "</li>";
+    // });
+    list.outerHTML = "<ol>" + fruits.map(fruit => `<li>${fruit}</li>`).join('') + "</ol>";
+    console.log("lleno:", list.textContent);
+  </script>
+
+</body>
+</html>

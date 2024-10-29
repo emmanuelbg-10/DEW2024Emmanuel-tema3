@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .item {
+      color: blue;
+      font-size: bold;
+    }
+
+    .selected {
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li>Manzanas</li>
+    <li>Peras</li>
+    <li class="item">Naranjas</li>
+    <li>Sandía</li>
+    <li>Kiwi</li>
+    <li>Plátano</li>
+  </ul>
+  <p>
+    <input type="text" id="newFruit">
+    <button onclick="appendFruit()">Agregar al final</button>
+    <button onclick="prependFruit()">Agregar al principio</button>
+    <button onclick="addFruitBeforeSelected()">Agregar delante del seleccionado</button>
+  </p>
+  <script>
+    const listFruit = document.querySelector('ul');
+    console.log("Nodos: ", listFruit.childNodes);
+    console.log("Elementos: ", listFruit.children);
+
+    const inputNewFruit = document.querySelector("#newFruit");
+
+    function setFeaturesLi(li) {
+      li.classList.add('item');
+      li.setAttribute('ondblclick', 'this.remove()');
+      li.setAttribute('onclick', 'this.classList.toggle("selected")')
+    }
+
+    function createFruit() {
+      const newLi = document.createElement('li');
+      newLi.textContent = inputNewFruit.value;
+      setFeaturesLi(newLi);
+      return newLi;
+    }
+
+    function appendFruit() {
+      listFruit.append( createFruit() );
+      
+    }
+
+    function prependFruit() {
+      listFruit.prepend( createFruit() );
+    }
+
+    function initList() {
+      document.querySelectorAll('li').forEach(li => {
+        setFeaturesLi(li);
+      });
+    }
+
+    function addFruitBeforeSelected() {
+      const liSelected = document.querySelector('.selected');
+      
+      // if (liSelected) liSelected.before( createFruit() );
+      // else appendFruit();
+      listFruit.insertBefore( createFruit(), liSelected);
+    }
+
+    initList();
+  </script>
+</body>
+</html>

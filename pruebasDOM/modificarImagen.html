@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cambiar imagenes</title>
+</head>
+<body>
+  <h1>Dado</h1>
+  <img src="sides/dice1.png" alt="sale un 1 en el dado">
+  <p>
+    <button onclick="throwDice()">lanzar el dado</button>
+  </p>
+  <script>
+    const image = document.querySelector('img');
+
+    function throwDice() {
+      let random = Math.floor(Math.random() * 6) + 1;
+      console.log(random);
+      image.src = `sides/dice${random}.png`;
+      image.alt = `sale un ${random} en el dado`;
+    }
+  </script>
+</body>
+</html>

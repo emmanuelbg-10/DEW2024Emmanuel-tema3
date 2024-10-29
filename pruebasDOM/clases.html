@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .red {
+      color: red;
+    }
+
+    .bgcyan {
+      background-color: cyan;
+    }
+
+    .underline {
+      text-decoration: underline;
+    }
+
+    .padding {
+      padding: 20px;
+    }
+
+    .capitalize {
+      text-transform: capitalize;
+    }
+  </style>
+</head>
+<body>
+  <h1>Indicar clases al párrafo</h1>
+  <p>
+    <button onclick="addClass('red')">color rojo</button>
+    <button onclick="addClass('bgcyan')">Fondo azul claro</button>
+    <button onclick="addClass('underline')">Subrayar</button>
+    <button onclick="addClass('padding')">Espaciado</button>
+    <button onclick="addClass('capitalize')">Capitalizar</button>
+  </p>
+  <p>Tamaño de fuente: 
+    <input type="range" name="fontsize" id="" min="8" max="64" value="12">
+    <button onclick="changeFontSize()">Cambiar tamaño fuente</button>
+    <button onclick="incrementFontSize()"> + </button>
+    <button onclick="decrementFontSize()"> - </button>
+  </p>
+  <div id="content">
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint harum sed architecto id distinctio esse nam consequuntur nihil modi? Adipisci, ipsam accusamus placeat accusantium quod sequi at quo nesciunt quos.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe maxime id, consequatur aliquid dolor laboriosam nulla necessitatibus eaque neque harum earum sunt quod? Consequuntur consectetur quas ex! Fuga, rerum molestias?</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis voluptatum et sequi officia voluptatem nobis consequuntur non fugiat accusantium quam? Fuga, laudantium illum! Minus, quia fugit omnis dolorem quo odio!</p>
+  </div>
+  <script>
+    const content = document.querySelector('#content');
+    let input = document.querySelector('input[name="fontsize"]');
+ 
+
+    // function addRed() {
+    //   content.classList.toggle('red');
+    // }
+
+    // function addBgCyan() {
+    //   content.classList.toggle('bgcyan');
+    // }
+
+    function addClass(className) {
+      content.classList.toggle(className);
+    }
+
+    function changeFontSize() {
+      console.log('Estoy en changeFontSize');
+      let size = input.value;
+      console.log(size);
+      //content.setAttribute('style', 'font-size: ' + size + 'px;')
+      content.style.fontSize = size + "px"
+    }
+
+    function incrementFontSize() {
+      let size = content.style.fontSize || "12px";
+      size = parseInt(size);
+      size++;
+      content.style.fontSize = size + "px";
+    }  
+  </script>
+</body>
+</html>

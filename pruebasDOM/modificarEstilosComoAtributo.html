@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Modificar estilo</h1>
+  <button onclick="changeRed()">Color rojo</button> 
+  <button onclick="changeYellow()">Fondo amarillo claro</button> 
+  <script>
+    const title = document.querySelector('h1');
+
+    function changeRed() {
+      title.setAttribute("style","color: red");
+    }
+
+    function changeYellow() {
+      title.setAttribute("style","background-color: yellow");
+    }
+
+  
+  </script>
+</body>
+</html>
