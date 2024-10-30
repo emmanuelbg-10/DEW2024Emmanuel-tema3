@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Listado</h1>
+  <ul></ul>
+  <button onclick="popupNewElement()">Nuevo Elemento</button>
+  <script>
+    const list = document.querySelector('ul');
+
+    function addElement(element) {
+      const li = document.createElement('li');
+      li.textContent = element;
+      list.append(li);
+    }
+
+    function popupNewElement() {
+      let windowElement = window.open('newElement.html', 'windowElement', 'height=200', 'width=150')
+      windowElement.onbeforeunload = function() {
+        addElement(windowElement.document.getElementById('element').value)
+      }
+    }
+
+  </script>
+</body>
+</html>
