@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beautiful Boxes</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2em;
+      text-align: center;
+      font-weight: 300;
+      color: #ffffff;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    #container {
+      display: flex;
+      flex-wrap: wrap;
+      width: 320px;
+      max-width: 90%;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .cell {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 5px;
+      width: 50px;
+      height: 50px;
+      font-size: 1em;
+      font-weight: bold;
+      color: #fff;
+      background-color: #4CAF50;
+      border-radius: 8px;
+      box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s, background-color 0.3s;
+      cursor: pointer;
+    }
+
+    .cell:hover {
+      background-color: #66bb6a;
+      transform: scale(1.1);
+    }
+
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Beautiful Boxes</h1>
+    <div id="container"></div>
+  </div>
+  <script>
+    const container = document.getElementById('container');
+    let counter = 1;
+    const maxBox = 30;
+    function createBox(){
+      let cell = document.createElement('div');
+      cell.classList.add('cell');
+      cell.textContent = counter++;
+      cell.onclick = function() {
+        cell.remove();
+      }
+      container.append(cell);
+      if(counter > maxBox){
+        clearInterval(idInterval);
+      }
+    }
+    let idInterval = setInterval(createBox, 100);
+  </script>
+</body>
+</html>
