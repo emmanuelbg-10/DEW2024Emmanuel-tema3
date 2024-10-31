@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Contadores</h1>
+  <p>Contador: <span id="counter">0</span></p>
+  <button onclick="stopCounter()">Parar</button>
+  <button onclick="startCounter()">Empezar</button>
+  <script>
+    const counter = document.getElementById('counter');
+    let idInterval = 0
+    function contador(){
+      counter.textContent++;
+     // print("<p>"+counter.value+"</p>");
+    }
+    
+
+    function stopCounter() {
+      clearInterval(idInterval);
+      idInterval = 0;
+    }
+    
+    function startCounter() {
+      if(idInterval === 0){
+       idInterval = setInterval(contador, 300);
+      }    
+    }
+  </script>
+</body>
+</html>
