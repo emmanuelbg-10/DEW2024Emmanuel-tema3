@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        margin: 20px;
+        text-align: center;
+      }
+
+      h1 {
+        color: #007bff;
+        margin-bottom: 20px;
+      }
+
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 10px;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        padding: 15px;
+        border: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #007bff;
+        color: white;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      tr:hover {
+        background-color: #e7f1ff;
+      }
+
+      .clickable {
+        cursor: pointer;
+        color: #ff4d4d;
+        text-decoration: underline;
+      }
+
+      .clickable:hover {
+        color: #d00000;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Estudio de ventanas Emmanuel</h1>
+    <!-- <button onclick="emergente()" disabled>Nueva ventana emergente</button> -->
+    <button onclick="emergente2()">Ventana emergente</button>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Edad</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+      <tfoot>
+        <th colspan="2">Media:</th>
+        <th id="total"></th>
+      </tfoot>
+    </table>
+    <script>
+      //abre la ventana y si intentas volver a abrirla en vez de abrir una nueva te redirige a la ya abierta
+      // function emergente() {
+      //   window.open("https://marca.com", "windowElement");
+      // }
+
+      function addElement(name, age) {
+        const tbody = document.querySelector("tbody");
+        const tr = document.createElement("tr");
+        const td1 = document.createElement("td");
+        const td2 = document.createElement("td");
+        const td3 = document.createElement("td");
+        td1.textContent = name;
+        td2.textContent = age;
+        td3.textContent = "X";
+        tr.append(td1, td2, td3);
+
+        td3.classList.add("clickable");
+        td3.onclick = function () {
+          tr.remove();
+          total();
+        };
+        tbody.append(tr);
+        total();
+      }
+
+      //poniendo height y el width la pestaña se vera en una venta ventana
+      function emergente2() {
+        let windowElement = window.open(
+          "auxventanas.html",
+          "windowElement",
+          "height=400,width=720"
+        );
+      }
+
+      function total() {
+        const total = document.querySelector("#total");
+        const tbody = document.querySelector("tbody");
+        let aux = 0;
+        let count = 0;
+        const array = tbody.querySelectorAll("tr");
+        if (array.length !== 0) {
+          array.forEach((td) => {
+            aux += parseFloat(td.cells[1].textContent);
+            count++;
+          });
+          total.textContent = (aux / count).toFixed(0);
+        } else {
+          total.textContent = 0;
+        }
+      }
+    </script>
+  </body>
+</html>

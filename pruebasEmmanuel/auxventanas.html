@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Insertar datos a la tabla</h1>
+    <input type="text" placeholder="Nombre..." id="name" /><br /><br />
+    <input type="number" placeholder="Edad..." id="age" /><br /><br />
+    <button onclick="insert()">Enviar</button>
+    <script>
+      function insert() {
+        const name = document.getElementById("name").value;
+        const age = document.getElementById("age").value;
+
+        if (name && age) {
+          window.opener.addElement(name, age);
+          window.close();
+        } else {
+          alert("Por favor, completa todos los campos");
+        }
+      }
+    </script>
+  </body>
+</html>

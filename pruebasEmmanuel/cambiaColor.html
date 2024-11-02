@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .selected {
+      background-color: yellow;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Cambia color a la lista</h1>
+  <ul>
+    <li>Esto</li>
+    <li>Es</li>
+    <li>Una</li>
+    <li>Prueba</li>
+  </ul>
+  <script>
+    function setFeaturesLi(li) {
+      //li.setAttribute('onclick', 'this.classList.toggle("selected")')
+      li.addEventListener('click', function () {
+        this.classList.toggle("selected");
+      });
+    }
+    const listado = document.querySelectorAll("li");
+    listado.forEach(li => {
+      setFeaturesLi(li);
+    });
+  </script>
+</body>
+
+</html>
