@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    h2 {
+      color: #ff0000;
+    }
+
+    .form-container {
+      margin-bottom: 20px;
+      padding: 20px;
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #555;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #28a745;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1em;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    table {
+      width: 80%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+      font-size: 1em;
+    }
+
+    thead {
+      background-color: #007bff;
+      color: white;
+    }
+
+    tfoot {
+      background-color: gray;
+      font-weight: bold;
+    }
+
+    th[colspan="2"] {
+      text-align: center;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tienda de Emmanuel</h1>
+  <label for="">Nombre del producto<input type="text" id="name"></label><br><br>
+  <label for="">Cantidad del producto<input type="number" id="amount" step="1" min="1"></label><br><br>
+  <label for="">Precio del producto<input type="number" id="price" step="0.01" min="0"></label><br><br>
+  <button onclick="insertRow()">Enviar</button><br><br>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th colspan="2">TOTAL: </th>
+        <th colspan="2" id="total">0</th>
+      </tr>
+    </tfoot>
+  </table>
+
+  <h2>Descuentos de andreita</h2>
+  <p>
+    <button onclick="Descuento(0.95)">5%</button>
+    <button onclick="Descuento(0.85)">15%</button>
+    <button onclick="Descuento(0.50)">50%</button>
+  </p>
+
+
+  <script>
+    let originalTotal = null;
+
+    function comprueba(){
+      const name = document.querySelector("#name").value;
+      const amount = parseFloat(document.querySelector("#amount").value); // Usamos parseFloat aquí
+      const price = parseFloat(document.querySelector("#price").value);
+      if (name !== "" && amount !== "" && price !== "" && Number.isInteger(amount) && amount > 0 && price > 0) {
+        return true;
+      } else {
+        alert("Envío no válido");
+        return false;
+      }
+    } 
+
+    function insertRow(){
+      if(comprueba()){
+        const name = document.querySelector("#name").value;
+        const amount = document.querySelector("#amount").value;
+        const price = parseFloat(document.querySelector("#price").value).toFixed(2);
+        const tbody = document.querySelector("tbody");
+        const tr = document.createElement("tr");
+        const td1 = document.createElement("td");
+        const td2 = document.createElement("td");
+        const td3 = document.createElement("td");
+        const td4 = document.createElement("td");
+        
+        td1.textContent = name;
+        td2.textContent = amount;
+        td3.textContent = price;
+        td4.textContent = (amount * price).toFixed(2);
+
+        tr.append(td1, td2, td3, td4);
+        tbody.append(tr);
+        total();
+      }
+    }
+      
+      function total() { 
+        const th = document.querySelector("#total");
+        const tbody = document.querySelector("tbody");
+        let aux = 0;
+
+        tbody.querySelectorAll("tr").forEach(element => {
+          aux += parseFloat(element.cells[3].textContent);
+        });
+        th.textContent = aux.toFixed(2);
+        originalTotal = aux;
+      }
+
+      function Descuento(descuentito) {
+        const th = document.querySelector("#total");
+        let total = parseFloat(th.textContent);
+
+        if(originalTotal === null){
+          originalTotal = total; // Guarda el total original si aún no está guardado
+        }
+
+        if(total === originalTotal){
+          // Aplica el descuento si está en el valor original
+          th.textContent = (total * descuentito).toFixed(2);
+        } else {
+          // Si ya está reducido, lo restaura al original
+          th.textContent = originalTotal.toFixed(2);
+        }
+      }
+    
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista Emmanuel</title>
+  <style>
+
+  </style>
+</head>
+<body>
+  <h1>Pruebas de listado Emmanuel</h1>
+  <ul>
+    <li>Buenos</li>
+    <li>Dias</li>
+    <li>Emmanuel</li>
+  </ul>
+  <input type="text" id="li" placeholder="dato..."><br><br>
+  <button onclick="insertLi()">Inserta datos al listado</button>
+  <script>
+    function setFeaturesLi(li){
+      li.setAttribute('onclick', 'this.remove()');
+    }
+
+    function initList(){
+      document.querySelectorAll('li').forEach(li => {
+        setFeaturesLi(li);       
+    });
+    }
+
+    function insertLi(){
+      if(document.querySelector("#li").value !== ""){
+        const ul = document.querySelector("ul");
+        const element = document.createElement("li");
+        element.textContent = document.querySelector("#li").value;
+        ul.append(element);
+        initList();
+      }
+      initList();
+    }
+
+    
+
+  </script>
+</body>
+</html>
