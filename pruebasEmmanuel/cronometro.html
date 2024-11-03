@@ -1,119 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    /* Estilos para centrar contenido y darle estilo de reloj digital */
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      font-family: Arial, sans-serif;
-      background-color: #f0f8ff;
-      height: 100vh;
-      margin: 0;
-    }
-
-    h1 {
-      font-size: 2em;
-      color: #333;
-    }
-
-    /* Estilo para la tabla de reloj */
-    table {
-      margin: 20px 0;
-      padding: 20px;
-      background-color: #222;
-      border-radius: 8px;
-      text-align: center;
-    }
-
-    th {
-      color: #00ff00;
-      font-size: 3em;
-      font-family: 'Courier New', monospace;
-      padding: 10px;
-      
-    }
-
-    /* Estilos de los botones */
-    button {
-      background-color: #4CAF50;
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      font-size: 1em;
-      border-radius: 5px;
-      cursor: pointer;
-      margin: 5px;
-      transition: background-color 0.3s;
-    }
-
-    button:hover {
-      background-color: #45a049;
-    }
-
-    button:active {
-      background-color: #3e8e41;
-    }
-  </style>
-</head>
-<body>
-  <h1>Reloj Emmanuel</h1>
-  <table>
-    <tr>
-      <th><span id="horas">00</span>:<span id="minutos">00</span>:<span id="segundos">00</span></th>
-    </tr>
-  </table>
-  <p>  
-    <button onclick="stop()">Parar</button>
-    <button onclick="start()">Empezar</button>
-  </p>
-  <button onclick="restart()">Reiniciar</button>
-
-  <script>
-    const segundos = document.getElementById('segundos');
-    const minutos = document.getElementById('minutos');
-    const horas = document.getElementById('horas');
-    let idInterval = 0;
-    function contador(){
-      segundos.textContent = (parseInt(segundos.textContent) + 1).toString().padStart(2, '0');
-      if(segundos.textContent === '60'){
-        segundos.textContent = '00';
-        minutos.textContent = (parseInt(minutos.textContent) + 1).toString().padStart(2, '0');
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* Estilos para centrar contenido y darle estilo de reloj digital */
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        font-family: Arial, sans-serif;
+        background-color: #f0f8ff;
+        height: 100vh;
+        margin: 0;
       }
-      
-      if(minutos.textContent === '60'){
-        minutos.textContent = '00';
-        horas.textContent = (parseInt(horas.textContent) + 1).toString().padStart(2, '0');
-      }
-      
-      if(horas.textContent === '24'){
-        horas.textContent = '00';
-      }
-    }
-    
 
-    function stop() {
-      clearInterval(idInterval);
-      idInterval = 0;
-    }
-    
-    function start() {
-      if(idInterval === 0){
-       idInterval = setInterval(contador, 1000);
-      }    
-    }
+      h1 {
+        font-size: 2em;
+        color: #333;
+      }
 
-    function restart(){
-      segundos.textContent = '00';
-      minutos.textContent = '00';
-      horas.textContent = '00';
-    }
-  </script>
-  
-</body>
+      /* Estilo para la tabla de reloj */
+      table {
+        margin: 20px 0;
+        padding: 20px;
+        background-color: #222;
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      th {
+        color: #00ff00;
+        font-size: 3em;
+        font-family: "Courier New", monospace;
+        padding: 10px;
+      }
+
+      /* Estilos de los botones */
+      button {
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        font-size: 1em;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 5px;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      button:active {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Reloj Emmanuel</h1>
+    <table>
+      <tr>
+        <th>
+          <span id="horas">00</span>:<span id="minutos">00</span>:<span
+            id="segundos"
+            >00</span
+          >
+        </th>
+      </tr>
+    </table>
+    <p>
+      <button onclick="stop()">Parar</button>
+      <button onclick="start()">Empezar</button>
+    </p>
+    <button onclick="restart()">Reiniciar</button>
+
+    <script>
+      const segundos = document.getElementById("segundos");
+      const minutos = document.getElementById("minutos");
+      const horas = document.getElementById("horas");
+      let idInterval = 0;
+      function contador() {
+        segundos.textContent = (parseInt(segundos.textContent) + 1)
+          .toString()
+          .padStart(2, "0");
+        if (segundos.textContent === "60") {
+          segundos.textContent = "00";
+          minutos.textContent = (parseInt(minutos.textContent) + 1)
+            .toString()
+            .padStart(2, "0");
+        }
+
+        if (minutos.textContent === "60") {
+          minutos.textContent = "00";
+          horas.textContent = (parseInt(horas.textContent) + 1)
+            .toString()
+            .padStart(2, "0");
+        }
+
+        if (horas.textContent === "24") {
+          horas.textContent = "00";
+        }
+      }
+
+      function stop() {
+        clearInterval(idInterval);
+        idInterval = 0;
+      }
+
+      function start() {
+        if (idInterval === 0) {
+          idInterval = setInterval(contador, 1000);
+        }
+      }
+
+      function restart() {
+        segundos.textContent = "00";
+        minutos.textContent = "00";
+        horas.textContent = "00";
+      }
+    </script>
+  </body>
 </html>

@@ -1,46 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    *{
-      align-content: center;
-    }
-  </style>
-</head>
-<body>
-  <h1>Prueba de Emmanuel</h1>
-  <script>
-for (let index = 0; index < 4; index) {
-  // Genera una posición aleatoria para cada ventana
-  const randomTop = Math.floor(Math.random() * window.screen.availHeight);
-  const randomLeft = Math.floor(Math.random() * window.screen.availWidth);
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        align-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Prueba de Emmanuel</h1>
+    <script>
+      for (let index = 0; index < 4; index) {
+        // Genera una posición aleatoria para cada ventana
+        const randomTop = Math.floor(Math.random() * window.screen.availHeight);
+        const randomLeft = Math.floor(Math.random() * window.screen.availWidth);
 
-  // Abre una nueva ventana en una posición aleatoria
-  let newWindow = window.open(
-    'https://marca.com',
-    '_blank',
-    `width=400,height=300,top=${randomTop},left=${randomLeft}`
-  );
+        // Abre una nueva ventana en una posición aleatoria
+        let newWindow = window.open(
+          "https://marca.com",
+          "_blank",
+          `width=400,height=300,top=${randomTop},left=${randomLeft}`
+        );
 
-  if (newWindow) {
-    newWindow.onload = () => {
-      // Intenta simular la pantalla completa al maximizar el tamaño de la ventana
-      newWindow.resizeTo(window.screen.availWidth, window.screen.availHeight);
-      newWindow.moveTo(0, 0);
+        if (newWindow) {
+          newWindow.onload = () => {
+            // Intenta simular la pantalla completa al maximizar el tamaño de la ventana
+            newWindow.resizeTo(
+              window.screen.availWidth,
+              window.screen.availHeight
+            );
+            newWindow.moveTo(0, 0);
 
-      // Después de 1 segundo, restaura la ventana a su tamaño y posición iniciales
-      setTimeout(() => {
-        newWindow.resizeTo(800, 600);
-        newWindow.moveTo(randomLeft, randomTop);
-      }, 1000);
-    };
-  } else {
-    console.error("No se pudo abrir la ventana. Asegúrate de que los pop-ups estén permitidos.");
-  }
-}
-  </script>
-</body>
+            // Después de 1 segundo, restaura la ventana a su tamaño y posición iniciales
+            setTimeout(() => {
+              newWindow.resizeTo(800, 600);
+              newWindow.moveTo(randomLeft, randomTop);
+            }, 1000);
+          };
+        } else {
+          console.error(
+            "No se pudo abrir la ventana. Asegúrate de que los pop-ups estén permitidos."
+          );
+        }
+      }
+    </script>
+  </body>
 </html>

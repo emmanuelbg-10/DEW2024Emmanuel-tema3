@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .bggreen {
+        background-color: green;
+      }
+
+      .red {
+        color: red;
+      }
+
+      .centrado {
+        text-align: center;
+      }
+
+      .italica {
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="contenido">
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
+        quisquam ad harum voluptatum nesciunt? Voluptatum et beatae similique,
+        qui labore sed nobis magnam velit voluptas, optio officia libero soluta.
+        Natus?
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem
+        inventore ipsa eos accusantium, reiciendis quisquam animi voluptas
+        maiores vitae quos quibusdam? Alias exercitationem iusto error quam nemo
+        sint, quas fugit?
+      </p>
+    </div>
+
+    <p>
+      <button onclick="change('red')">Rojo</button>
+      <button onclick="change('bggreen')">Fondo verde</button>
+      <button onclick="change('centrado')">Texto centrado</button>
+      <button onclick="change('italica')">Italica</button>
+      <button onclick="incrementFontSize()">+</button>
+      <button onclick="decrementFontSize()">-</button>
+    </p>
+
+    <label for="">Tamaño de fuente:</label>
+    <input type="range" name="fontsize" id="" min="8" max="64" value="16" />
+    <button onclick="changeFontSize()">changeFontSize</button>
+
+    <script>
+      const contenido = document.getElementById("contenido");
+
+      function change(element) {
+        contenido.classList.toggle(element);
+      }
+      let aux = 16;
+      function incrementFontSize() {
+        aux++;
+        contenido.style.fontSize = aux + "px";
+      }
+
+      function decrementFontSize() {
+        aux--;
+        contenido.style.fontSize = aux + "px";
+      }
+
+      function changeFontSize() {
+        const input = parseInt(
+          document.querySelector("input[name='fontsize']").value
+        );
+        contenido.style.fontSize = input + "px";
+        aux = input;
+      }
+    </script>
+  </body>
+</html>
