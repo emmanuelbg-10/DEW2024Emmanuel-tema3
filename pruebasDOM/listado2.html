@@ -1,0 +1,88 @@
+<!-- ESTO CAE EN EL EXAMEN, ALGO ASI PERO MAS DIFICIL -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .selected {
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <h1>Listado</h1>
+  <p>
+    Filtro <input type="text" name="" id="filter" oninput="search()">
+  </p>
+  <ul id="origin"></ul>
+  <hr>
+  <ul id="destiny"></ul>
+  <button onclick="sendSelected()">enviar seleccionados</button>
+  <button onclick="sortSubjects()">ordenar</button>
+  <script>
+    function selectItem(item) {
+      // if (item.classList.contains('selected')) {
+      //   item.classList.remove('selected');
+      // } else {
+      //   item.classList.add('selected');
+      // }
+      item.classList.toggle('selected');
+    }
+
+    function sendSelected() {
+      console.log([...ul.children]
+        .filter(item => item.classList.contains('selected'))
+        .map(item => item.textContent)
+      );
+      // [...ul.children]
+      // .filter(item => item.classList.contains('selected'))
+      // .forEach(item=> destiny.append(item));
+
+      [...document.querySelectorAll('#origin li.selected')]
+      .forEach(item => {
+        destiny.append(item)
+        item.classList.remove('selected');
+      });
+    }
+
+    // const items = document.querySelectorAll('li');
+    // items.forEach(item => item.setAttribute('onclick', "selectItem(this)"));
+
+    const subjects = ['DEW', 'DSW', 'DOR', 'DLP', 'EMR', 'PRY', 'FCT'];
+    const ul = document.querySelector('ul');
+    const destiny = document.getElementById('destiny');
+    const inputFilter = document.getElementById('filter');
+
+    subjects.forEach(subject => createSubject(subject));
+    
+    function createSubject(subject){
+      const li = document.createElement('li');
+      li.textContent = subject;
+      li.setAttribute('onclick', "selectItem(this)")
+      ul.append(li);
+    }
+
+    function search() {
+      let word = inputFilter.value;
+      console.log(word);
+      [...ul.children].forEach(li => { 
+        if(li.textContent.toLocaleLowerCase().startsWith(word.toLocaleLowerCase())) {
+          li.hidden = false;
+        } else {
+          li.hidden = true;
+        }   
+      });
+    }
+
+    function sortSubjects() {
+      let liSubjects = [...document.querySelectorAll('#origin li')];
+      liSubjects.sort( (a,b) => a.textContent.localeCompare(b.textContent));
+      console.log(liSubjects)
+      liSubjects.forEach(li => ul.append(li));
+    }
+  
+  </script>
+</body>
+</html>
