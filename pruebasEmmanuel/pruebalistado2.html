@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .selected {
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Listado Emmanuel</h1>
+    <p>Filtro <input type="text" name="" id="filter" oninput="search()" /></p>
+    <ul id="origin"></ul>
+    <hr />
+    <ul id="other"></ul>
+
+    <button onclick="sendSelected()">Send selected</button>
+    <button onclick="orderList()">ordenar</button>
+    <button onclick="orderOtherList()">ordenar la otra lista</button>
+
+    <script>
+      const subjects = ["DSW", "DEW", "PRY", "EMR", "DOR", "GS"];
+      const list = document.querySelector("ul");
+      const otherlist = document.getElementById("other");
+      function createList() {
+        subjects.forEach((subject) => {
+          const li = document.createElement("li");
+          li.textContent = subject;
+
+          li.setAttribute("onclick", "selectItem(this)");
+
+          // li.classList.add("selected");
+          list.append(li);
+        });
+      }
+
+      function selectItem(item) {
+        item.classList.toggle("selected");
+      }
+
+      function sendSelected() {
+        [...list.children].forEach((element) => {
+          if (element.classList.contains("selected")) {
+            element.classList.remove("selected");
+            //esto es para que despues no puedas volver a poner el fondo amarillo
+            //element.setAttribute("onclick", "");
+            otherlist.append(element);
+          } else {
+            list.append(element);
+          }
+        });
+      }
+
+      function orderList() {
+        let liSubjects = [...document.querySelectorAll("#origin li")];
+        liSubjects.sort((a, b) => a.textContent.localeCompare(b.textContent));
+        liSubjects.forEach((li) => list.append(li));
+      }
+
+      function orderOtherList() {
+        let liSubjects = [...document.querySelectorAll("#other li")];
+        liSubjects.sort((a, b) => a.textContent.localeCompare(b.textContent));
+        liSubjects.forEach((li) => otherlist.append(li));
+      }
+
+      function search() {
+        const input = document.getElementById("filter");
+        [...document.querySelectorAll("li")].forEach((element) => {
+          if (
+            element.textContent
+              .toLocaleLowerCase()
+              .includes(input.value.toLocaleLowerCase())
+          ) {
+            element.hidden = false;
+          } else {
+            element.hidden = true;
+          }
+        });
+      }
+
+      createList();
+    </script>
+  </body>
+</html>
