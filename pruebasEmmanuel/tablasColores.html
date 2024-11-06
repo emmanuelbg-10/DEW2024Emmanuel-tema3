@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table,
+      tr,
+      td,
+      th {
+        border: 1px solid black;
+        text-align: center;
+      }
+
+      .color1 {
+        background-color: blue;
+      }
+      .color2 {
+        background-color: red;
+      }
+      .color3 {
+        background-color: purple;
+      }
+
+      .color4 {
+        background-color: green;
+      }
+
+      .color5 {
+        background-color: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Tabla de colores</h1>
+    <label for="">Nombre: <input type="text" id="name" /></label><br /><br />
+    <label for="">Edad: <input type="number" id="age" /></label><br /><br />
+    <button onclick="añadir()">Añade dato</button><br /><br />
+    <button onclick="soloRojo()">Muestra solo los rojos</button>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Edad</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script defer>
+      const name = document.getElementById("name");
+      const age = document.getElementById("age");
+      const tbody = document.querySelector("tbody");
+      const thHead = document.querySelectorAll("thead tr th");
+
+      [...thHead].forEach((element) => {
+        element.setAttribute("style", "background-color: black; color: white;");
+      });
+
+      function añadir() {
+        const tr = document.createElement("tr");
+        const td1 = document.createElement("td");
+        const td2 = document.createElement("td");
+        const td3 = document.createElement("td");
+        td1.textContent = name.value;
+        td2.textContent = age.value;
+        td3.textContent = "X";
+
+        tr.append(td1, td2, td3);
+        tbody.append(tr);
+        //si tocas la x eliminas la fila asi, easy pisi y super entendible el ()
+        td3.onclick = () => tr.remove();
+      }
+
+      function randomColors() {
+        let aleatorio = 0;
+        [...document.querySelectorAll("tbody tr")].forEach((tr) => {
+          [...tr.children].forEach((td) => {
+            td.classList.remove(
+              "color1",
+              "color2",
+              "color3",
+              "color4",
+              "color5"
+            );
+
+            aleatorio = Math.floor(Math.random() * 5) + 1;
+            td.classList.add("color" + aleatorio);
+          });
+        });
+      }
+
+      function randomColors2() {
+        let aleatorio = 0;
+        [...document.querySelectorAll("tbody tr")].forEach((tr) => {
+          tr.classList.remove("color1", "color2", "color3", "color4", "color5");
+          aleatorio = Math.floor(Math.random() * 5) + 1;
+          tr.classList.add("color" + aleatorio);
+        });
+      }
+
+      function soloRojo() {
+        if (idInterval !== 0) {
+          clearInterval(idInterval);
+          idInterval = 0;
+          [...document.querySelectorAll("tbody tr")].forEach((tr) => {
+            if (tr.classList.contains("color2")) {
+              tr.hidden = false;
+            } else {
+              tr.hidden = true;
+            }
+          });
+        } else {
+          [...document.querySelectorAll("tbody tr")].forEach((tr) => {
+            tr.hidden = false;
+          });
+          idInterval = setInterval(randomColors2, 2000);
+        }
+      }
+
+      let idInterval = setInterval(randomColors2, 2000);
+    </script>
+  </body>
+</html>
